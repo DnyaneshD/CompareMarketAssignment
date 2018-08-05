@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "kafka-node": "^2.6.1",
+    "redis": "^2.8.0"
+  }
+}
