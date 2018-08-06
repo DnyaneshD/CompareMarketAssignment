@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import HeaderContainer from "./header/headerContainer";
-import PropertyDetailsContainer from "./propertyDetails/propertyDetailsContainer";
+import InputComponent from "./acceptInput/inputComponent";
+import ResultComponent from "./result/resultComponent";
 
 class App extends PureComponent {
   constructor() {
@@ -20,7 +21,8 @@ class App extends PureComponent {
     return (
       <div>
         <HeaderContainer onSearchTermChange={this.onSearchTermChange} />
-        <PropertyDetailsContainer searchTerm={this.state.searchTerm} />
+        <InputComponent />
+        <ResultComponent />
       </div>
     );
   }

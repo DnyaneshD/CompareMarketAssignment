@@ -1,5 +1,5 @@
 const reader = require("../src/consumers/bookReader");
-const redisClient = require("./business/wordCounter");
+const redisClient = require("./business/wordCountService");
 //const chunkProducer = require("../src/producers/bookChunkProducer");
 
 reader.registerConsumer();

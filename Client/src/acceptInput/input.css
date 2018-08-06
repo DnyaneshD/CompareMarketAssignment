@@ -1,0 +1,19 @@
+.searchInput {
+  width: 450px;
+  height: 30px;
+  font-size: 1.5em;
+  padding: 10px;
+  margin: 0px auto;
+}
+
+.clearButton {
+  background-color: sienna;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 10px 20px;
+}

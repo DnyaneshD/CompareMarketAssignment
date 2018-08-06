@@ -7,6 +7,9 @@ const router = express.Router();
 
 router
   .route("/")
+
+  .get(controller.getWordsList)
+
   /**
    * @api {get} v1/bookReader List words
    * @apiDescription Get a list of words from given URL
@@ -24,7 +27,6 @@ router
    * @apiError (Unauthorized 401)  Unauthorized  Only authenticated users can access the data
    * @apiError (Forbidden 403)     Forbidden     Only admins can access the data
    */
-  //.get(authorize(ADMIN), validate(listUsers), controller.list);
-  .post(controller.getWordsList);
+  .post(controller.processWordsList);
 
 module.exports = router;

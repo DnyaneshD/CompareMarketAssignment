@@ -1,8 +1,6 @@
-# HTM Property App
+# Compare Market Work Count Assignment
 
-HTM Property App.
-
-This application is part of interview process
+This web application is used to accept URI of the book be processed to count words
 
 ### Get Started
 

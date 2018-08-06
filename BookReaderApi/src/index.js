@@ -17,30 +17,7 @@ var io = require("socket.io").listen(server);
 
 io.on("connection", function(socket) {
   socket.on("join", function(data) {
-    //socket.emit("timer", { hello: "world" });
-    redisClient.keys("*", (err, keys) => {
-      if (err) return console.log(err);
-      if (keys) {
-        async.map(
-          keys,
-          (key, cb) => {
-            redisClient.get(key, function(error, value) {
-              if (error) return cb(error);
-              let item = {};
-              item["name"] = key;
-              item["count"] = value;
-              console.log(JSON.stringify(item));
-              socket.emit("timer", { item });
-            });
-          },
-          function(error, results) {
-            if (error) return console.log(error);
-            console.log(results);
-            res.json({ data: results });
-          }
-        );
-      }
-    });
+    socket.emit("requestProcessed", { sucess: true });
   });
   socket.on("message", function(data) {
     socket.emit("news", { hello: "world" });

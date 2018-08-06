@@ -19,16 +19,23 @@ exports.registerConsumer = () => {
       autoCommit: true
     }
   ];
-  const options = {
-    autoCommit: true,
-    fetchMaxWaitMs: 1,
-    fetchMaxBytes: 1024 * 1024,
-    time: Date.now(),
-    maxNum: 1,
-    fromOffset: 1
+  var options = {
+    host: "localhost:2181",
+    kafkaHost: "localhost:9092",
+    zk: undefined,
+    batch: undefined,
+    ssl: true,
+    groupId: "webeventsDev",
+    sessionTimeout: 15000,
+    protocol: ["roundrobin"],
+    fromOffset: "latest", // default
+    commitOffsetsOnFirstJoin: true, // on the very first time this consumer group subscribes to a topic, record the offset returned in fromOffset (latest/earliest)
+    outOfRangeOffset: "earliest", // default
+    migrateHLC: false, // for details please see Migration section below
+    migrateRolling: true
   };
 
-  const consumer = new kafka.HighLevelConsumer(client, topics, options);
+  const consumer = new kafka.ConsumerGroup(options, "webevents.dev");
 
   consumer.on("message", function(message) {
     if (message.value === "") return null;
@@ -42,10 +49,6 @@ exports.registerConsumer = () => {
 
   consumer.on("error", function(err) {
     console.log("error", err);
-  });
-
-  consumer.commit(function(err, data) {
-    console.log(data);
   });
 
   return consumer;
