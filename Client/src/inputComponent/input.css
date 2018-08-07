@@ -1,4 +1,4 @@
-.searchInput {
+.input {
   width: 450px;
   height: 30px;
   font-size: 1.5em;
@@ -6,7 +6,7 @@
   margin: 0px auto;
 }
 
-.clearButton {
+.submitButton {
   background-color: sienna;
   border: none;
   color: white;
@@ -16,4 +16,13 @@
   display: inline-block;
   font-size: 20px;
   margin: 10px 20px;
+}
+
+.background {
+  width: auto;
+  border: 5px solid white;
+  padding: 20px;
+  margin: 0px auto;
+  background: #92b6c8;
+  text-align: center;
 }

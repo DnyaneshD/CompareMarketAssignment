@@ -5,19 +5,19 @@ import "./input.css";
 class InputComponent extends PureComponent {
   constructor() {
     super();
-    this.state = { seachTerm: "" };
+    this.state = { inputUri: "" };
   }
 
   render() {
     return (
-      <div className="search">
+      <div className="background">
         <input
-          value={this.state.seachTerm}
-          className="searchInput"
+          value={this.state.inputUri}
+          className="input"
           placeholder="Please provide input URI for word count here"
           onChange={this.onInputChange}
         />
-        <button className="clearButton" onClick={this.onSendRequest}>
+        <button className="submitButton" onClick={this.onSendRequest}>
           Submit
         </button>
       </div>
@@ -25,7 +25,7 @@ class InputComponent extends PureComponent {
   }
 
   onInputChange = event => {
-    this.setState({ seachTerm: event.target.value });
+    this.setState({ inputUri: event.target.value });
   };
 
   onSendRequest = () => {

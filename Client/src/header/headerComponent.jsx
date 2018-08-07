@@ -9,16 +9,6 @@ class HeaderComponent extends PureComponent {
       </div>
     );
   }
-
-  onInputChange = event => {
-    this.setState({ seachTerm: event.target.value });
-    this.props.onInputChangeEvent(event.target.value);
-  };
-
-  onClearInput = () => {
-    this.setState({ seachTerm: "" });
-    this.props.onInputChangeEvent("");
-  };
 }
 
 export default HeaderComponent;

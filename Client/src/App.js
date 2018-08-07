@@ -1,12 +1,12 @@
 import React, { PureComponent } from "react";
-import HeaderContainer from "./header/headerContainer";
-import InputComponent from "./acceptInput/inputComponent";
+import HeaderComponent from "./header/headerComponent.jsx";
+import InputComponent from "./inputComponent/inputComponent.jsx";
 import ResultComponent from "./result/resultComponent";
 
 class App extends PureComponent {
   constructor() {
     super();
-    this.state = { searchTerm: "", hasError: false };
+    this.state = { hasError: false };
   }
 
   componentDidCatch(error, info) {
@@ -20,16 +20,12 @@ class App extends PureComponent {
 
     return (
       <div>
-        <HeaderContainer onSearchTermChange={this.onSearchTermChange} />
+        <HeaderComponent />
         <InputComponent />
         <ResultComponent />
       </div>
     );
   }
-
-  onSearchTermChange = term => {
-    this.setState({ searchTerm: term });
-  };
 }
 
 export default App;
