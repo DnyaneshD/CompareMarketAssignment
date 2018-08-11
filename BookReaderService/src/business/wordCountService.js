@@ -1,10 +1,13 @@
 var redis = require("redis");
 var async = require("async");
 const MongoClient = require("mongodb").MongoClient;
+const producer = require("../producers/wordCountFinished");
 
 const url = "mongodb://dd:dd1234@ds020168.mlab.com:20168/wordcount";
 
-var redisCleint = redis.createClient();
+var redisCleint = redis.createClient(
+  "//'':hNtpz58VXjAnudYVsWBcnSJMR967X3Zh@redis-12480.c52.us-east-1-4.ec2.cloud.redislabs.com:12480"
+);
 
 redisCleint.on("connect", function() {
   console.log("Redis client connected");
@@ -65,13 +68,17 @@ exports.checkCountIfPrime = () => {
             url,
             function(err, client) {
               const db = client.db();
-              const collection = db.collection("wordsdetails");
+              const collectionName = "wordsdetails_" + new Date().getTime();
+              const collection = db.collection(collectionName);
 
               collection.insertMany(results, function(err, result) {
                 console.log("Inserted documents into the collection");
                 //callback(result);
               });
+
+              redisCleint.flushall();
               client.close();
+              producer.KafkaService.notifyWhenFinished(collectionName);
             }
           );
         }

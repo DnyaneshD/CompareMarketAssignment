@@ -3,7 +3,7 @@ var uuid = require("uuid");
 
 let producer = null;
 
-exports.registerProducer = () => {
+exports.registerProducer = function() {
   const client = new kafka.Client("localhost:2181", "my-client-id", {
     sessionTimeout: 300,
     spinDelay: 100,
@@ -15,17 +15,18 @@ exports.registerProducer = () => {
     console.log("Kafka Producer is connected and ready.");
   });
 
+  // For this demo we just log producer errors to the console.
   producer.on("error", function(error) {
     console.error(error);
   });
 };
 
 exports.KafkaService = {
-  sendRecord: (url, callback = () => {}) => {
+  notifyWhenFinished: (data, callback = () => {}) => {
     const event = {
       id: uuid.v4(),
       timestamp: Date.now(),
-      data: url
+      collectionName: data
     };
 
     const buffer = new Buffer.from(JSON.stringify(event));
@@ -33,9 +34,9 @@ exports.KafkaService = {
     // Create a new payload
     const record = [
       {
-        topic: "bookRederEvent.startWordCount",
+        topic: "bookRederEvent.wordCountCompleted",
         messages: buffer,
-        attributes: 1
+        attributes: 1 /* Use GZip compression for the payload */
       }
     ];
     //Send record to Kafka and log result/error

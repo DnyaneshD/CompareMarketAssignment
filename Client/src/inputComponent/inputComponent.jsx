@@ -5,7 +5,7 @@ import "./input.css";
 class InputComponent extends PureComponent {
   constructor() {
     super();
-    this.state = { inputUri: "" };
+    this.state = { inputUri: "", response: "" };
   }
 
   render() {
@@ -31,10 +31,17 @@ class InputComponent extends PureComponent {
   onSendRequest = () => {
     axios
       .post("http://localhost:3000/v1/bookReader", {
-        url:
-          "http://www.loyalbooks.com/download/text/Railway-Children-by-E-Nesbit.txt"
+        url: this.state.inputUri
       })
-      .then(response => console.log(response));
+      .then(response => {
+        this.props.onResponseTextChange(response.data.message);
+      });
+  };
+
+  clearMessage = () => {
+    this.setState({
+      response: null
+    });
   };
 }
 

@@ -1,5 +1,5 @@
 const fs = require("fs");
-const chunkProducer = require("../producers/bookChunkProducer");
+const chunkProducer = require("../producers/wordCountFinished");
 const wordCountService = require("../business/wordCountService");
 
 let countInProgress = false;
@@ -26,5 +26,7 @@ exports.readBookFromLocal = () => {
 function callCheckifPrime() {
   if (!readStreamInProgress && !countInProgress) {
     wordCountService.checkCountIfPrime();
+    readStreamInProgress = !readStreamInProgress;
+    countInProgress = !countInProgress;
   }
 }

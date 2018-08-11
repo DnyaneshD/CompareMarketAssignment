@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import "./results.css";
-//import { subscribeToTimer } from "../api/connectSocket";
+import InputComponent from "../inputComponent/inputComponent";
 import axios from "axios";
 import openSocket from "socket.io-client";
 import InfiniteScroll from "react-infinite-scroller";
@@ -11,11 +11,12 @@ class ResultComponent extends PureComponent {
 
   constructor() {
     super();
-    this.state = { wordDetails: [], requestInProgress: true };
+    this.state = { wordDetails: [], requestInProgress: true, hasMore: false };
     this.subscribeToTimer();
   }
 
   requestWordList = async () => {
+    if (this.state.requestInProgress) return;
     this.skip += 50;
     let existingWordDetails = this.state.wordDetails;
     axios
@@ -23,40 +24,11 @@ class ResultComponent extends PureComponent {
       .then(response => {
         const newArray = existingWordDetails.concat(response.data);
         this.setState({
-          wordDetails: newArray
+          wordDetails: newArray,
+          hasMore: true
         });
-        //return response.data;
       });
   };
-
-  // render() {
-  //   const listItems = this.state.items.map(item => {
-  //     return (
-  //       <li key={item.name}>
-  //         {item.name}-{item.count}-{item.isPrime ? "Prime" : "Not-Prime"}
-  //       </li>
-  //     );
-  //   });
-
-  //   console.log(this.requestWordList());
-
-  //   return (
-  //     <div styles={{ height: "700px", overflow: "auto" }}>
-  //       <InfiniteScroll
-  //         pageStart={0}
-  //         loadMore={this.requestWordList()}
-  //         hasMore={true || false}
-  //         loader={
-  //           <div className="loader" key={0}>
-  //             Loading ...
-  //           </div>
-  //         }
-  //         useWindow={false}>
-  //         {listItems}
-  //       </InfiniteScroll>
-  //     </div>
-  //   );
-  // }
 
   render() {
     const loader = <div className="loader">Loading ...</div>;
@@ -74,10 +46,15 @@ class ResultComponent extends PureComponent {
 
     return (
       <div className="results">
+        {items.length === 0 ? (
+          <label htmlFor="recipient-name">{this.props.response}</label>
+        ) : (
+          ""
+        )}
         <InfiniteScroll
           pageStart={0}
           loadMore={this.requestWordList}
-          hasMore={true}
+          hasMore={this.state.hasMore}
           loader={loader}>
           <div className="tracks">
             <table align="center">
@@ -116,6 +93,9 @@ class ResultComponent extends PureComponent {
     this.socket.on("requestProcessed", result => {
       this.setState({
         requestInProgress: !result
+      });
+      this.setState({
+        hasMore: true
       });
       this.requestWordList();
     });

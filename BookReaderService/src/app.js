@@ -1,9 +1,8 @@
-const reader = require("../src/consumers/bookReader");
-const redisClient = require("./business/wordCountService");
-//const chunkProducer = require("../src/producers/bookChunkProducer");
+const consumer = require("../src/consumers/bookReader");
+const producer = require("../src/producers/wordCountFinished");
 
-reader.registerConsumer();
-//chunkProducer.registerProducer();
+consumer.registerConsumer();
+producer.registerProducer();
 
 process.on("SIGINT", function() {
   consumer.close(true, function() {

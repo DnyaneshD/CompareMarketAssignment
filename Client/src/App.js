@@ -6,7 +6,7 @@ import ResultComponent from "./result/resultComponent";
 class App extends PureComponent {
   constructor() {
     super();
-    this.state = { hasError: false };
+    this.state = { hasError: false, responseMsg: null };
   }
 
   componentDidCatch(error, info) {
@@ -21,11 +21,15 @@ class App extends PureComponent {
     return (
       <div>
         <HeaderComponent />
-        <InputComponent />
-        <ResultComponent />
+        <InputComponent onResponseTextChange={this.onResponseTextChange} />
+        <ResultComponent response={this.state.responseMsg} />
       </div>
     );
   }
+
+  onResponseTextChange = response => {
+    this.setState({ responseMsg: response });
+  };
 }
 
 export default App;

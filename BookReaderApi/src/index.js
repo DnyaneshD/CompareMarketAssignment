@@ -1,28 +1,19 @@
-// make bluebird default Promise
-Promise = require("bluebird"); // eslint-disable-line no-global-assign
 const { port, env } = require("./config/vars");
 const app = require("./config/express");
-const reader = require("../src/producers/bookReader");
-var redis = require("redis");
-var async = require("async");
-var redisClient = redis.createClient();
+const socketConnectionService = require("./api/services/socketConnection");
+const producer = require("./producers/bookReader");
+const consumer = require("./consumers/workCountCompleted");
 
-reader.registerProducer();
+producer.registerProducer();
+consumer.registerConsumer();
 
 // listen to requests
 var server = app.listen(port, () =>
   console.info(`server started on port ${port} (${env})`)
 );
-var io = require("socket.io").listen(server);
 
-io.on("connection", function(socket) {
-  socket.on("join", function(data) {
-    socket.emit("requestProcessed", { sucess: true });
-  });
-  socket.on("message", function(data) {
-    socket.emit("news", { hello: "world" });
-  });
-});
+//Connect socket for pushing message to client
+socketConnectionService.socketService(server);
 
 /**
  * Exports express
