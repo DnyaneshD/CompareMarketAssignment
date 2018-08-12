@@ -21,25 +21,23 @@ exports.registerProducer = function() {
   });
 };
 
-exports.KafkaService = {
-  notifyWhenFinished: (data, callback = () => {}) => {
-    const event = {
-      id: uuid.v4(),
-      timestamp: Date.now(),
-      collectionName: data
-    };
+exports.notifyWhenFinished = (data, callback = () => {}) => {
+  const event = {
+    id: uuid.v4(),
+    timestamp: Date.now(),
+    collectionName: data
+  };
 
-    const buffer = new Buffer.from(JSON.stringify(event));
+  const buffer = new Buffer.from(JSON.stringify(event));
 
-    // Create a new payload
-    const record = [
-      {
-        topic: "bookRederEvent.wordCountCompleted",
-        messages: buffer,
-        attributes: 1 /* Use GZip compression for the payload */
-      }
-    ];
-    //Send record to Kafka and log result/error
-    producer.send(record, callback);
-  }
+  // Create a new payload
+  const record = [
+    {
+      topic: "bookRederEvent.wordCountCompleted",
+      messages: buffer,
+      attributes: 1 /* Use GZip compression for the payload */
+    }
+  ];
+  //Send record to Kafka and log result/error
+  producer.send(record, callback);
 };

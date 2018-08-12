@@ -1,7 +1,7 @@
 const { port, env } = require("./config/vars");
 const app = require("./config/express");
 const socketConnectionService = require("./api/services/socketConnection");
-const producer = require("./producers/bookReader");
+const producer = require("./producers/processWords");
 const consumer = require("./consumers/workCountCompleted");
 
 producer.registerProducer();
@@ -13,7 +13,7 @@ var server = app.listen(port, () =>
 );
 
 //Connect socket for pushing message to client
-socketConnectionService.socketService(server);
+socketConnectionService.registerSocketService(server);
 
 /**
  * Exports express

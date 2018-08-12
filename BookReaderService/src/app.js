@@ -1,4 +1,4 @@
-const consumer = require("../src/consumers/bookReader");
+const consumer = require("../src/consumers/processWordCount");
 const producer = require("../src/producers/wordCountFinished");
 
 consumer.registerConsumer();

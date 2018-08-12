@@ -20,7 +20,7 @@ exports.registerConsumer = () => {
 
   const consumer = new kafka.ConsumerGroup(
     options,
-    "bookRederEvent.startWordCount"
+    "bookRederEvent.processWords"
   );
 
   consumer.on("message", function(message) {

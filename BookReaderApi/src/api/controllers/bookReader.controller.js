@@ -1,4 +1,4 @@
-const reader = require("../../producers/bookReader");
+const processWords = require("../../producers/processWords");
 const db = require("../services/db");
 /**
  * Get word list from book
@@ -15,7 +15,7 @@ exports.processWordsList = (req, res, next) => {
       res.json({ message: "Url in request object cannot be empty" });
     }
 
-    reader.KafkaService.sendRecord(req.body.url);
+    processWords.publishProcessWords(req.body.url);
 
     res.json({ message: "We are working on request. Hold on." });
   } catch (error) {
@@ -24,7 +24,14 @@ exports.processWordsList = (req, res, next) => {
 };
 
 exports.getWordsList = async (req, res, next) => {
-  db.find(Number(req.query.skip), 100).then(docs => {
+  let skip = null;
+  if (!req.query || !req.query.skip) {
+    skip = 50;
+  } else {
+    skip = req.query.skip;
+  }
+
+  db.find(Number(skip), 100).then(docs => {
     res.json(docs);
   });
 };

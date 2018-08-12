@@ -1,6 +1,6 @@
 var socketObject = null;
 
-exports.socketService = server => {
+exports.registerSocketService = server => {
   var io = require("socket.io").listen(server);
   io.on("connection", function(socket) {
     socketObject = socket;

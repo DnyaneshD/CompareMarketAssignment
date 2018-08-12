@@ -1,5 +1,4 @@
 const fs = require("fs");
-const chunkProducer = require("../producers/wordCountFinished");
 const wordCountService = require("../business/wordCountService");
 
 let countInProgress = false;
@@ -14,16 +13,16 @@ exports.readBookFromLocal = () => {
     readStreamInProgress = true;
     wordCountService.wordCounter(data).then(result => {
       countInProgress = false;
-      callCheckifPrime();
+      callToCheckifPrime();
     });
   });
   readStream.on("end", (err, status) => {
     readStreamInProgress = false;
-    callCheckifPrime();
+    callToCheckifPrime();
   });
 };
 
-function callCheckifPrime() {
+function callToCheckifPrime() {
   if (!readStreamInProgress && !countInProgress) {
     wordCountService.checkCountIfPrime();
     readStreamInProgress = !readStreamInProgress;

@@ -20,25 +20,23 @@ exports.registerProducer = () => {
   });
 };
 
-exports.KafkaService = {
-  sendRecord: (url, callback = () => {}) => {
-    const event = {
-      id: uuid.v4(),
-      timestamp: Date.now(),
-      data: url
-    };
+exports.publishProcessWords = (url, callback = () => {}) => {
+  const event = {
+    id: uuid.v4(),
+    timestamp: Date.now(),
+    data: url
+  };
 
-    const buffer = new Buffer.from(JSON.stringify(event));
+  const buffer = new Buffer.from(JSON.stringify(event));
 
-    // Create a new payload
-    const record = [
-      {
-        topic: "bookRederEvent.startWordCount",
-        messages: buffer,
-        attributes: 1
-      }
-    ];
-    //Send record to Kafka and log result/error
-    producer.send(record, callback);
-  }
+  // Create a new payload
+  const record = [
+    {
+      topic: "bookRederEvent.processWords",
+      messages: buffer,
+      attributes: 1
+    }
+  ];
+  //Send record to Kafka and log result/error
+  producer.send(record, callback);
 };
