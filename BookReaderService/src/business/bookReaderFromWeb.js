@@ -9,7 +9,6 @@ const readBookFromLocal = require("./bookReaderFromLocal");
 exports.readFileFromUrl = async url => {
   try {
     if (!url) {
-      return;
       throw new Error("Invalid argument");
     }
     const writeStream = fs.createWriteStream("./src/temp/test.txt");

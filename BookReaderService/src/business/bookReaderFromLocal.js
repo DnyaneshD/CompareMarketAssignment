@@ -11,7 +11,7 @@ exports.readBookFromLocal = () => {
   readStream.on("data", data => {
     countInProgress = true;
     readStreamInProgress = true;
-    wordCountService.wordCounter(data).then(result => {
+    wordCountService.wordCounter(data).then(() => {
       countInProgress = false;
       callToCheckifPrime();
     });

@@ -11,16 +11,16 @@ exports.registerProducer = () => {
   });
 
   producer = new kafka.Producer(client);
-  producer.on("ready", function() {
+  producer.on("ready", function () {
     console.log("Kafka Producer is connected and ready.");
   });
 
-  producer.on("error", function(error) {
+  producer.on("error", function (error) {
     console.error(error);
   });
 };
 
-exports.publishProcessWords = (url, callback = () => {}) => {
+exports.publishProcessWords = (url, callback = () => { }) => {
   const event = {
     id: uuid.v4(),
     timestamp: Date.now(),

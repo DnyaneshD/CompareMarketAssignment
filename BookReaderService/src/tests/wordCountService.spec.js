@@ -34,7 +34,7 @@ describe("wordCountService test", () => {
     //Act
     const result = await wordCountService.wordCounter("Hello \n world");
     //Assert
-    assert.equal(result, !undefined);
+    assert.equal(result.length, 2);
   });
 
   it("service should have a method checkCountIfPrime", () => {

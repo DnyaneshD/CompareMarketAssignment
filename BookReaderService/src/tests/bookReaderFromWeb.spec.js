@@ -1,5 +1,5 @@
 const sinon = require("sinon");
-const { assert } = require("chai");
+const { assert, expect } = require("chai");
 const bookReaderFromWebService = require("../business/bookReaderFromWeb");
 
 describe("BookReaderFromWeb Service test", () => {
@@ -21,5 +21,14 @@ describe("BookReaderFromWeb Service test", () => {
     await bookReaderFromWebService.readFileFromUrl("https://example.com");
     //Assert
     assert.isTrue(readBookFromLocalSpy.calledOnce);
+  });
+
+  it("readBookFromLocal method should throw error when called without Uri", async () => {
+    try {
+      await bookReaderFromWebService.readFileFromUrl();
+    } catch (err) {
+      console.log(err);
+      assert.equal(err.message, "Invalid argument");
+    }
   });
 });
