@@ -25,6 +25,8 @@ Requirements:
  2. Kafka set up is required (I followed https://dzone.com/articles/running-apache-kafka-on-windows-os . I assume dev tem would already have it)
 3. I have also used Redis and Mongo but no set up is required
 
+Note: If kafka setup is not available and dev team do not want to do the set up for to test this application, I will set up app with https://www.cloudkarafka.com/plans.html but, I will need at least 1 more day to do so.
+
 Steps:
 1. Download or clone this folder
 2. 'npm i' in 3 folders
