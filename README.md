@@ -1,6 +1,6 @@
 # CompareMarketAssignment
 
-This is a solution for following problem give to me during las communication with HR team.
+This is a solution for following problem give to me during last communication with HR team.
 
 Given a book in a text file (http://www.loyalbooks.com/download/text/Railway-Children-by-E-Nesbit.txt for example)
 
@@ -9,23 +9,23 @@ Given a book in a text file (http://www.loyalbooks.com/download/text/Railway-Chi
 
 # About Solution
 
-To be very honest there are multiple ways to slove given problem but I chose below keeping following things in mind.
+To be very honest there are multiple ways to slove given problem but I chose below approach keeping following things in mind.
 1. Scalability of the application
-2. Technical stack matching to the current usage of technologies used in your organisation
+2. Technical stack matching to the current usage of technologies your organisation
 
-High level solution: I have used 3 layas to slove the problem.
+High level solution: I have used 3 layers to slove the problem.
 1. Client - To accepet URI from user and show output to the user
-2. API - An application which will interact with Client and process the output
+2. API - An application which will interact with Client and pass request to process the output
 3. Service - A service which have only one resposiblity to process the words from give uri
 
 # To Run solution
 
 Requirements: 
  1. Node version 9.0.0 or higher is required
- 2. Kafka set up is required (I followed https://dzone.com/articles/running-apache-kafka-on-windows-os . I assume dev tem would already have it)
+ 2. Kafka set up is required (I followed https://dzone.com/articles/running-apache-kafka-on-windows-os . I assume dev team would already have it)
 3. I have also used Redis and Mongo but no set up is required
 
-Note: If kafka setup is not available and dev team do not want to do the set up for to test this application, I will set up app with https://www.cloudkarafka.com/plans.html but, I will need at least 1 more day to do so.
+Note: If kafka setup is not available and dev team do not want to do the set up for to test this application, I will set up app with https://www.cloudkarafka.com/plans.html but, I will need at least 1 day to do so. Please feel free to share your if you want me set up.
 
 Steps:
 1. Download or clone this folder (https://github.com/DnyaneshD/CompareMarketAssignment)
@@ -35,7 +35,7 @@ Steps:
   ii. Now run BookReaderApi by hitting 'npm run dev' on terminal or VS code
   iii. At this stage Client can be started with help of 'npm start' on terminal
   
- Here if all the service are started correctly then URI can be put on client text area and out should be visible on Client after finishing the operation.
+ Here if all the service are started correctly then if valid URI in text area client text area and output should be visible on Client after finishing the operation.
 
 
 
