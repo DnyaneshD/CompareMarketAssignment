@@ -1,4 +1,3 @@
-const sinon = require("sinon");
 const { assert } = require("chai");
 const dbService = require("../../services/db");
 
