@@ -18,5 +18,24 @@ High level solution: I have used 3 layas to slove the problem.
 2. API - An application which will interact with Client and process the output
 3. Service - A service which have only one resposiblity to process the words from give uri
 
+# To Run solution
+
+Requirements: 
+ 1. Node version 9.0.0 or higher is required
+ 2. Kafka set up is required (I followed https://dzone.com/articles/running-apache-kafka-on-windows-os . I assume dev tem would already have it)
+3. I have also used Redis and Mongo but no set up is required
+
+Note: If kafka setup is not available and dev team do not want to do the set up for to test this application, I will set up app with https://www.cloudkarafka.com/plans.html but, I will need at least 1 more day to do so.
+
+Steps:
+1. Download or clone this folder
+2. 'npm i' in 3 folders
+3. After npm install
+  i. Run BookReaderService first by hitting 'npm run dev' on terminal or VS code
+  ii. Now run BookReaderApi by hitting 'npm run dev' on terminal or VS code
+  iii. At this stage Client can be started with help of 'npm start' on terminal
+  
+ Here if all the service are started correctly then URI can be put on client text area and out should be visible on Client after finishing the operation.
+
 
 
