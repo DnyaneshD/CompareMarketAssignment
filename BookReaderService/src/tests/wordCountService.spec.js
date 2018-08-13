@@ -1,6 +1,6 @@
 const sinon = require("sinon");
 const { assert } = require("chai");
-var redis = require("redis");
+const redisService = require("../services/redisService");
 const wordCountService = require("../business/wordCountService");
 
 describe("wordCountService test", () => {
@@ -23,13 +23,14 @@ describe("wordCountService test", () => {
 
   it("wordCounter method should return correct count", async () => {
     //Arrange
-    var redisClient = redis.createClient(
-      "//'':hNtpz58VXjAnudYVsWBcnSJMR967X3Zh@redis-12480.c52.us-east-1-4.ec2.cloud.redislabs.com:12480"
-    );
+    var redisClient = redisService.connectRedis();
 
-    redisClient.get = () => {
-      return kela;
+    var get = {
+      get: () => {
+        return "";
+      }
     };
+    sinon.stub(redisClient, "get").returns(get);
 
     //Act
     const result = await wordCountService.wordCounter("Hello \n world");
@@ -51,5 +52,21 @@ describe("wordCountService test", () => {
     await wordCountService.checkCountIfPrime();
     //Assert
     assert.isTrue(checkCountIfPrimeSpy.calledOnce);
+  });
+
+  it("checkCountIfPrime should get keys and check if promise", async () => {
+    //Arrange
+    var redisClient = redisService.connectRedis();
+
+    var keys = {
+      keys: () => {
+        ["kela"];
+      }
+    };
+    sinon.stub(redisClient, "keys").returns(keys);
+    //Act
+    await wordCountService.checkCountIfPrime();
+    //Assert
+    //assert.isTrue(checkCountIfPrimeSpy.calledOnce);
   });
 });

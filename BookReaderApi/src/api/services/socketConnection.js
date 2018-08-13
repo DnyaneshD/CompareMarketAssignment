@@ -14,5 +14,7 @@ exports.registerSocketService = server => {
 };
 
 exports.notifyClient = () => {
-  socketObject.emit("requestProcessed", { sucess: true });
+  if (socketObject) {
+    socketObject.emit("requestProcessed", { sucess: true });
+  }
 };

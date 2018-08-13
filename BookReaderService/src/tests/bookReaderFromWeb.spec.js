@@ -27,7 +27,6 @@ describe("BookReaderFromWeb Service test", () => {
     try {
       await bookReaderFromWebService.readFileFromUrl();
     } catch (err) {
-      console.log(err);
       assert.equal(err.message, "Invalid argument");
     }
   });

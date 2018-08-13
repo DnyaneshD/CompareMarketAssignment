@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "dev": "nodemon ./src/index.js",
     "test:unit": "cross-env NODE_ENV=test mocha src/tests",
     "test": "cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --timeout 20000 --recursive src/tests"
   },

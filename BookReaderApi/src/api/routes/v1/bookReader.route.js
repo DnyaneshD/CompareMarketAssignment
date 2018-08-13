@@ -1,7 +1,5 @@
 const express = require("express");
-const validate = require("express-validation");
 const controller = require("../../controllers/bookReader.controller");
-const { listWords } = require("../../validations/user.validation");
 
 const router = express.Router();
 

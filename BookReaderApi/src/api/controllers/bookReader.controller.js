@@ -1,5 +1,6 @@
 const processWords = require("../../producers/processWords");
 const db = require("../services/db");
+const validation = require("../validations/validation");
 /**
  * Get word list from book
  * @public
@@ -7,16 +8,23 @@ const db = require("../services/db");
 exports.processWordsList = (req, res, next) => {
   try {
     if (!req.body) {
+      res.status(400);
       res.json({ message: "Request object cannot be empty" });
     }
 
     if (!req.body.url) {
-      //TODO: throw invalid input
+      res.status(400);
       res.json({ message: "Url in request object cannot be empty" });
+    }
+
+    if (!validation.ValidURL(req.body.url)) {
+      res.status(400);
+      res.json({ message: "Url format in is not valid" });
     }
 
     processWords.publishProcessWords(req.body.url);
 
+    res.status(202);
     res.json({ message: "We are working on request. Hold on." });
   } catch (error) {
     next(error);

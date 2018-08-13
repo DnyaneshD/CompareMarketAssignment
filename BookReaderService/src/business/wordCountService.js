@@ -5,10 +5,8 @@ const redisService = require("../services/redisService");
 
 const redisClient = redisService.connectRedis();
 
-//let accumulated = "";
 exports.wordCounter = async data => {
   var parts = data.split("\n");
-  //accumulated = parts.pop();
 
   const result = await parts.map(part => {
     part.split(" ").map(word => {

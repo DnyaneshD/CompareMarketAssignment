@@ -25,6 +25,7 @@ exports.registerConsumer = () => {
   );
 
   consumer.on("message", function(event) {
+    if (!event.value) return;
     db.setCollectionName(JSON.parse(event.value).collectionName);
     socketService.notifyClient();
   });
