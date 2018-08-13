@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "nodemon ./src/index.js",
+    "dev": "nodemon ./src/app.js",
     "test:unit": "cross-env NODE_ENV=test mocha src/tests",
     "test": "cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --timeout 20000 --recursive src/tests"
   },
@@ -19,6 +19,7 @@
     "cross-env": "^5.2.0",
     "eslint": "^4.2.0",
     "mocha": "^3.3.0",
+    "nodemon": "^1.11.0",
     "nyc": "^12.0.2",
     "sinon": "^6.0.0",
     "sinon-chai": "^3.0.0"
